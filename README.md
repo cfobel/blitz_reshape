@@ -13,3 +13,10 @@ can be obtained by running:
 
 
 [1]: https://github.com/syntheticpp/blitz
+
+# Tests #
+
+The `blitz_reshape.tests` module contains some test cases, which can be run
+using the following command from the root of the repository:
+
+    nosetests -s blitz_reshape/tests

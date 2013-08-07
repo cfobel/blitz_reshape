@@ -4,7 +4,6 @@
 #include <stdexcept>
 #include <iostream>
 #include <blitz/array.h>
-#include <blitz/tinyvec-et.h>
 #include <Formatter.hpp>
 
 
@@ -47,10 +46,23 @@ Array<T, R2> reshape(Array<T, R1> A, TinyVector<int, R2> new_shape) {
         for(int& i : new_shape) {
             if(i == -1) {
                 i = inferred_extent;
+                new_total_length *= i;
             }
         }
     }
+
+    if(new_total_length != total_length) {
+        throw std::runtime_error(Formatter() << "Total size must remain the "
+                                 "same. (" << new_total_length << " != " <<
+                                 total_length << ")");
+    }
+
     return Array<T, R2>(A.data(), new_shape, neverDeleteData);
+}
+
+template <typename T, int R1, int R2>
+void reshape_test(Array<T, R1> A, TinyVector<int, R2> new_shape) {
+    Array<T, R2> B = reshape(A, new_shape);
 }
 
 } // namespace blitz

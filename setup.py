@@ -5,16 +5,19 @@ import os
 from distutils.core import setup, Extension
 
 from Cython.Build import cythonize
-import blitz as b
+import blitz
+import blitz_reshape
 
-include_dirs = [b.get_include(), b.get_cython_include()]
+include_dirs = [blitz.get_include(), blitz.get_cython_include(),
+                blitz_reshape.get_include()]
 sys.path += include_dirs
 
 blitz_testbed = Extension('blitz_reshape.tests.BlitzTestbed',
                           ['blitz_reshape/tests/BlitzTestbed.pyx'],
-                          extra_objects=[os.path.join(b.get_lib(),
+                          extra_objects=[os.path.join(blitz.get_lib(),
                                                       'libblitz.a')],
-                          include_dirs=include_dirs, language='c++')
+                          include_dirs=include_dirs, language='c++',
+                          extra_compile_args=['-O3', '-std=c++0x'])
 
 setup(name = "blitz_reshape",
     version = "0.0.1",
