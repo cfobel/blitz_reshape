@@ -25,4 +25,8 @@ def test_reshape(a_extents, b_extents):
     cdef int i
     for i in xrange(A_view.shape[0]):
         A_view[i] = i
-    reshape_test(deref(A), deref(new_shape))
+    try:
+        reshape_test(deref(A), deref(new_shape))
+    finally:
+        del new_shape
+        del A
