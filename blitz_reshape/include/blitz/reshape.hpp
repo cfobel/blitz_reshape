@@ -62,7 +62,16 @@ Array<T, R2> reshape(Array<T, R1> A, TinyVector<int, R2> new_shape) {
 
 template <typename T, int R1, int R2>
 void reshape_test(Array<T, R1> A, TinyVector<int, R2> new_shape) {
+    /*
+     * A wrapper around the `reshape` function to allow for testing without
+     * handling the return value.  This allows Cython to call the function.
+     */
     Array<T, R2> B = reshape(A, new_shape);
+    std::cout << std::endl;
+    std::cout << "Original shape: " << A.shape() << " (" << product(A.shape())
+              << ")" << std::endl;
+    std::cout << "New shape:      " << B.shape() << " (" << product(B.shape())
+              << ")" << std::endl;
 }
 
 } // namespace blitz

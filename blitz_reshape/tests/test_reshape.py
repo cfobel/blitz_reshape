@@ -28,5 +28,5 @@ def test_same_rank():
 
 
 def test_inferred_extent():
-    test_reshape(a_extents=(4, 3), b_extents=(2, -1))
-    test_reshape(a_extents=(4, 3), b_extents=(-1, 6))
+    test_reshape(a_extents=(8, 3), b_extents=(2, -1))
+    test_reshape(a_extents=(8, 3), b_extents=(-1, 4))
